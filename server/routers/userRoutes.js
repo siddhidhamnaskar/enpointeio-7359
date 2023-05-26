@@ -54,7 +54,7 @@ userRouter.post("/login",async(req,res)=>{
         })
        }
        else{
-         res.status(400).json("Incorrect Password");
+         res.status(400).json(err);
        }
 
       
