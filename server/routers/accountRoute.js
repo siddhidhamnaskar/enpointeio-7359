@@ -78,7 +78,7 @@ accountRouter.get("/transactions",async(req,res)=>{
     }
     catch(err){
 
-        res.status(505).json(err);
+        res.status(404).json(err);
     }
 })
 
@@ -95,7 +95,7 @@ accountRouter.get("/accounts",async(req,res)=>{
     }
     catch(err){
 
-        res.status(505).json(err);
+        res.status(404).json(err);
 
     }
 })
@@ -113,6 +113,7 @@ accountRouter.get("/trans/:id",async(req,res)=>{
     }
     catch(err)
     {
+        res.status(404).json(err);
 
     }
 })
