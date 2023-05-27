@@ -10,17 +10,19 @@ import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
 import { base_url } from '../Services/API';
 import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+
 
 
 export default function BasicTable() {
   const [rows,setRow]=React.useState([]);
+  const [load,setLoad]=React.useState(true);
 
 
   React.useEffect(()=>{
+    setLoad(true)
     const token=JSON.parse(localStorage.getItem('token'))||""
      fetch(`${base_url}/users`,{
         method:"GET",
@@ -33,18 +35,22 @@ export default function BasicTable() {
         return res.json();
      })
      .then((json)=>{
-        setRow(json)
+      setLoad(false)
+      setRow(json)
      })
 
 
 
-  })
+  },[])
 
 
 
 
 
-  return (
+  return <>
+    {load ?<Box sx={{ width: '100%' }}>
+    <LinearProgress />
+  </Box>:null}
     <TableContainer style={{width:"50%",margin:"auto",marginTop:"30px"}} component={Paper}>
       <Table sx={{ minWidth: 450 }} aria-label="simple table">
         <TableHead>
@@ -72,5 +78,5 @@ export default function BasicTable() {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    </>
 }

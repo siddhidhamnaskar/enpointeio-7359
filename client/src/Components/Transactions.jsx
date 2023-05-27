@@ -5,16 +5,20 @@ import { base_url } from "../Services/API"
 import { TextField ,Paper} from "@mui/material"
 import Button from '@mui/material/Button';
 import CustomizedTables from './table';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 export default function Transactions(){
     const [details,setDetails]=useState([])
     const {token,setToken}=useContext(tokenContext);
+    const [load,setLoad]=useState(true);
     const [credit, setCredit]=useState();
     const [draw,setDraw]=useState();
 
 
     const getDetails=()=>{
+        setLoad(true)
         const tok=JSON.parse(localStorage.getItem('token'))||"";
         
         fetch(`${base_url}/ac/transactions`,{
@@ -30,7 +34,9 @@ export default function Transactions(){
         })
         .then((json)=>{
             console.log(json);
-            setDetails(json)
+            setDetails(json);
+            setLoad(false)
+            
         })
 
     }
@@ -94,8 +100,12 @@ export default function Transactions(){
 
 
     return <>
+     {load ?<Box sx={{ width: '100%' }}>
+      <LinearProgress />
+    </Box>:null}
 
       <div className="trans">
+     
         <div>
             <div>
                 <Paper style={{padding:"30px"}} elevation={20}>

@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import {base_url} from '../Services/API';
 import { useContext } from 'react';
 import { tokenContext } from './Context';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
+
 export default function Banker(){
 
   const [user, setUser]=useState({Email:"",Password:""});
@@ -44,11 +47,20 @@ export default function Banker(){
      })
      .then((res)=>{
        res.json().then((data)=>{
-        localStorage.setItem('token',JSON.stringify(data));
-        setToken(data);
-        setLoad(false)
-        alert("Login Successfull");
-      navigate("/accounts");
+        if(data==="Wrong Credintials")
+        {
+          setLoad(false)
+          alert("Wrong Credintials");
+          
+        }
+        else{
+          localStorage.setItem('token',JSON.stringify(data));
+          setToken(data);
+          setLoad(false)
+          alert("Login Successfull");
+        navigate("/accounts");
+        }
+       
        })
       
      })
@@ -94,8 +106,11 @@ export default function Banker(){
 
 
   return <>
-  <div style={{width:"40%",margin:"auto"}}>
+  <div style={{width:"40%",margin:"auto"}} className='bankersLogin'>
   <Paper sx={{width:'100%',height:"90vh"}} elevation={20}>
+  {load ?<Box sx={{ width: '100%' }}>
+      <LinearProgress />
+    </Box>:null}
   <Typography align="center" style={{paddingTop:"50px",fontSize:"23px", fontWeight:"bold",marginBottom:"-50px"}}>BANKERS LOGIN</Typography>
              <form style={formstyle}>
 

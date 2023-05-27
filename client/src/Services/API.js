@@ -1,1 +1,1 @@
-export const base_url="http://localhost:4056"
+export const base_url="https://bank-0os7.onrender.com"

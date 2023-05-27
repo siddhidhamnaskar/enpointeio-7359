@@ -2,6 +2,7 @@
   width: 100%;
   height: 100vh;
   display: flex;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
 }
@@ -16,4 +17,24 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+
+
+@media screen and (max-width:600px){
+
+.App{
+  flex-direction: column;
+}
+.bankersLogin{
+  width: 90%;
+
+}
+.trans{
+  flex-direction: column;
+}
+.trans>div{
+  width: 90%;
+}
+
 }

@@ -10,6 +10,8 @@ import Paper from '@mui/material/Paper';
 import {formatISO9075} from "date-fns";
 import { useParams } from 'react-router-dom';
 import { base_url } from '../Services/API';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,13 +40,14 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 export default function UserTransTable() {
-
+  const [load,setLoad]=React.useState(true);
 
     const [props,setProps]=React.useState([]);
 
     const {id}=useParams();
 
     React.useEffect(()=>{
+      setLoad(true)
         console.log(id);
         const token=JSON.parse(localStorage.getItem('token'))||"";
         console.log(token)
@@ -60,14 +63,18 @@ export default function UserTransTable() {
         })
         .then((json)=>{
             console.log(json);
-            setProps(json)
+            setProps(json);
+            setLoad(false)
         })
 
     },[])
 
 
 
-  return (
+  return <>
+        {load ?<Box sx={{ width: '100%' }}>
+    <LinearProgress />
+  </Box>:null}
     
         <TableContainer style={{width:'80%',height:"80vh",margin:'auto'}} component={Paper}>
             <h2>Transaction Details</h2>
@@ -96,5 +103,5 @@ export default function UserTransTable() {
             </TableBody>
           </Table>
         </TableContainer>
-  );
+  </>
 }

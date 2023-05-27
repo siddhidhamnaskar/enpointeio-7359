@@ -3,6 +3,8 @@ import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
  import { useNavigate } from "react-router-dom";
  import { base_url } from '../Services/API';
+ import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
  import { useContext } from 'react';
 import { tokenContext } from './Context';
@@ -45,11 +47,21 @@ export default function Customer(){
      })
      .then((res)=>{
        res.json().then((data)=>{
-        localStorage.setItem('token',JSON.stringify(data));
-        setToken(data);
-        setLoad(false)
-        alert("Login Successfull");
-      navigate("/transactions");
+        if(data==="Wrong Credintials")
+        {
+          setLoad(false)
+          alert("Wrong Credintials");
+          
+        }
+        else
+        {
+          localStorage.setItem('token',JSON.stringify(data));
+          setToken(data);
+          setLoad(false)
+          alert("Login Successfull");
+        navigate("/transactions");
+        }
+     
        })
       
      })
@@ -93,10 +105,12 @@ export default function Customer(){
 
 
 
-
   return <>
   <div style={{width:"40%",margin:"auto"}}>
   <Paper sx={{width:'100%',height:"90vh"}} elevation={20}>
+    {load ?<Box sx={{ width: '100%' }}>
+      <LinearProgress />
+    </Box>:null}
   <Typography align="center" style={{paddingTop:"50px",fontSize:"23px", fontWeight:"bold",marginBottom:"-50px"}}>CUSTOMERS LOGIN</Typography>
              <form style={formstyle}>
 
