@@ -11,6 +11,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 export default function Transactions(){
     const [details,setDetails]=useState([])
+    const [balance,setBalance]=useState();
     const {token,setToken}=useContext(tokenContext);
     const [load,setLoad]=useState(true);
     const [credit, setCredit]=useState();
@@ -49,12 +50,27 @@ export default function Transactions(){
 
 
     const deposite=()=>{
+        console.log(details[0]);
         const tok=JSON.parse(localStorage.getItem('token'))||"";
-
-        const dep={
+        if(details[0]===undefined)
+        {
+            var dep={
+                Deposite:credit,
+                Balance:credit
+            }
+        }
+        else{
+        //  setBalance(parseInt(details[0].Balance)+parseInt(credit));
+        var dep={
             Deposite:credit,
             Balance:parseInt(details[0].Balance)+parseInt(credit)
         }
+
+        }
+
+     
+
+      
         fetch(`${base_url}/ac/account`,{
             method:"POST",
             headers:{
@@ -71,7 +87,7 @@ export default function Transactions(){
 
     const withdraw=()=>{
         const tok=JSON.parse(localStorage.getItem('token'))||"";
-        if(details[0].Balance<draw){
+        if(details[0].Balance<draw || !details[0].Balance){
             alert("Insufficient Funds")
         }
         else
