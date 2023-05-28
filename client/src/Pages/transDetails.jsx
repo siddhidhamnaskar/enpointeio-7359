@@ -33,9 +33,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 
 
@@ -45,10 +42,11 @@ export default function UserTransTable() {
     const [props,setProps]=React.useState([]);
 
     const {id}=useParams();
+    
 
     React.useEffect(()=>{
       setLoad(true)
-        console.log(id);
+   
         const token=JSON.parse(localStorage.getItem('token'))||"";
         console.log(token)
         fetch(`${base_url}/ac/trans/${id}`,{
@@ -72,6 +70,7 @@ export default function UserTransTable() {
 
 
   return <>
+  <div className='transactionContainer'>
         {load ?<Box sx={{ width: '100%' }}>
     <LinearProgress />
   </Box>:null}
@@ -103,5 +102,6 @@ export default function UserTransTable() {
             </TableBody>
           </Table>
         </TableContainer>
+        </div>
   </>
 }

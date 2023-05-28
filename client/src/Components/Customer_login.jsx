@@ -10,7 +10,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { tokenContext } from './Context';
 export default function Customer(){
 
-  const [user, setUser]=useState({Email:"",Password:""});
+  const [user, setUser]=useState({Email:"",Password:"",Role:"Customer"});
   const  [disabled, setDisabled]=useState(true);
   const [load,setLoad]=useState(false);
   const {token,setToken}=useContext(tokenContext)
@@ -51,6 +51,7 @@ export default function Customer(){
         {
           setLoad(false)
           alert("Wrong Credintials");
+          setUser({Name:"",Email:"",Password:"",Role:"Customer"})
           
         }
         else
@@ -67,6 +68,7 @@ export default function Customer(){
      })
      .catch((err)=>{
       alert("Login Failed");
+      setUser({Name:"",Email:"",Password:"",Role:"Customer"})
      })
 
   }
@@ -106,12 +108,12 @@ export default function Customer(){
 
 
   return <>
-  <div style={{width:"40%",margin:"auto"}}>
-  <Paper sx={{width:'100%',height:"90vh"}} elevation={20}>
-    {load ?<Box sx={{ width: '100%' }}>
+  <div className='bankersLogin'>
+  <Paper sx={{width:'100%',height:"90vh",borderRadius:"5px"}} elevation={20}>
+    {load ?<Box sx={{ width: '100%',borderRadius:"20px",marginBottom:"-20px" }}>
       <LinearProgress />
     </Box>:null}
-  <Typography align="center" style={{paddingTop:"50px",fontSize:"23px", fontWeight:"bold",marginBottom:"-50px"}}>CUSTOMERS LOGIN</Typography>
+  <Typography className='header' align="center" style={{fontSize:"23px",fontWeight:"bold"}}>CUSTOMERS LOGIN</Typography>
              <form style={formstyle}>
 
                       
@@ -139,9 +141,9 @@ export default function Customer(){
     placeholder="Enter Your Password"
     style={inputstyle} 
   />
-     <Button variant="contained" disabled={disabled} onClick={login}>LOGIN</Button>
+     <Button variant="contained" style={{width:"30%"}} disabled={disabled} onClick={login}>LOGIN</Button>
   </form>
-  <p>Don't have any account?</p><Link to={"/signup"}>SignUp</Link>
+  <p style={{marginTop:"-60px",color:"gray",fontWeight:"lighter"}}>Don't have any account?</p><Link to={"/customerSignup"} style={{textDecoration:"none",fontWeight:"bold"}}>SignUp</Link>
 
   </Paper>
   </div>

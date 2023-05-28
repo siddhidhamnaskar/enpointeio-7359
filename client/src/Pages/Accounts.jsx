@@ -48,11 +48,13 @@ export default function BasicTable() {
 
 
   return <>
+  <div className='accountsContainer'>
     {load ?<Box sx={{ width: '100%' }}>
     <LinearProgress />
   </Box>:null}
-    <TableContainer style={{width:"50%",margin:"auto",marginTop:"30px"}} component={Paper}>
-      <Table sx={{ minWidth: 450 }} aria-label="simple table">
+    <TableContainer style={{width:"50%",margin:"auto"}} component={Paper}>
+      <h2>All Customers Details</h2>
+      <Table sx={{ minWidth: 450 ,marginTop:"30px"}} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
@@ -78,5 +80,6 @@ export default function BasicTable() {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
     </>
 }

@@ -1,18 +1,21 @@
 import { Paper, TextField, Typography ,Button} from "@mui/material";
-import {Box} from "@mui/material";
-// import ResponsiveAppBar from "../Components/AppBar";
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
+
 import { useEffect, useState } from "react";
  import { useNavigate } from "react-router-dom";
-// import Login from "./Login";
+
  import { base_url } from "../Services/API";
-export default function Signup(){
-    // const [data,setData]=useState([]);
-    const [userData, setUserData]=useState({Name:"",Email:"",Password:""});
+export default function CustomerSignup(){
+    const [load,setLoad]=useState(false)
+    const [userData, setUserData]=useState({Name:"",Email:"",Password:"",Role:"Customer"});
     const  [disabled, setDisabled]=useState(true);
 
      const navigate=useNavigate();
     const register=()=>{
+      
       try{
+        setLoad(true)
         fetch(`${base_url}/signup`,{
           method:"POST",
           headers:{
@@ -21,6 +24,7 @@ export default function Signup(){
           body:JSON.stringify(userData)
         }).then ((res)=>{
           alert("Registration Successfull");
+          setLoad(false)
           navigate("/");
 
         })
@@ -30,6 +34,8 @@ export default function Signup(){
       }
       catch(err){
         alert("Registration Failed");
+        setLoad(false);
+        setUserData({Name:"",Email:"",Password:"",Role:"Customer"})
       }
      
 
@@ -58,7 +64,7 @@ const onsubmit=(e)=>{
   
   
   register();
-  setUserData({Name:"",Email:"",Password:""});
+ 
   
   
 
@@ -95,8 +101,11 @@ const onsubmit=(e)=>{
     }
 
     return<>
-      
+      <div className="signupContainer">
        <Paper elevation={20} style={paperStyle}>
+       {load ?<Box sx={{ width: '100%' }}>
+      <LinearProgress />
+    </Box>:null}
         <Typography align="center" style={{paddingTop:"50px",fontSize:"23px", fontWeight:"bold"}}>CREATE YOUR ACCOUNT</Typography>
              <form style={formstyle}>
 
@@ -138,7 +147,7 @@ const onsubmit=(e)=>{
      <Button variant="contained" disabled={disabled} onClick={onsubmit}>SUBMIT</Button>
   </form>
   </Paper>
-
+  </div>
     </>
 
 

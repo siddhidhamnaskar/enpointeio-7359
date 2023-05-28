@@ -1,21 +1,25 @@
 import {Paper,TextField, Typography ,Button} from '@mui/material';
+import * as React from 'react';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {base_url} from '../Services/API';
 import { useContext } from 'react';
 import { tokenContext } from './Context';
+// import LoadingButton from '@mui/lab/LoadingButton';
+// import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
 export default function Banker(){
-
-  const [user, setUser]=useState({Email:"",Password:""});
+  
+  const [user, setUser]=useState({Email:"",Password:"",Role:"Banker"});
   const  [disabled, setDisabled]=useState(true);
   const [load,setLoad]=useState(false);
   const {token,setToken}=useContext(tokenContext)
  const navigate=useNavigate();
-  
+ 
+ 
 
   useEffect(()=>{
     if(user.Email.length>0 && user.Password.length>7)
@@ -51,6 +55,7 @@ export default function Banker(){
         {
           setLoad(false)
           alert("Wrong Credintials");
+          setUser({Name:"",Email:"",Password:"",Role:"Banker"})
           
         }
         else{
@@ -66,6 +71,7 @@ export default function Banker(){
      })
      .catch((err)=>{
       alert("Login Failed");
+      setUser({Name:"",Email:"",Password:"",Role:"Banker"})
      })
 
   }
@@ -76,6 +82,7 @@ export default function Banker(){
    
     display:"flex",
     flexDirection:"column",
+   
     width:"100%" ,
     height:"70vh", 
     alignItems:"center",
@@ -106,18 +113,15 @@ export default function Banker(){
 
 
   return <>
-  <div style={{width:"40%",margin:"auto"}} className='bankersLogin'>
-  <Paper sx={{width:'100%',height:"90vh"}} elevation={20}>
-  {load ?<Box sx={{ width: '100%' }}>
-      <LinearProgress />
+  <div  className='bankersLogin'>
+  <Paper sx={{width:'100%',height:"90vh",borderRadius:"5px"}} elevation={20}>
+  {load ?<Box sx={{ width: '100%',borderRadius:"20px",marginTop:"10px" }}>
+      <LinearProgress style={{borderRadius:"20px"}}/>
     </Box>:null}
-  <Typography align="center" style={{paddingTop:"50px",fontSize:"23px", fontWeight:"bold",marginBottom:"-50px"}}>BANKERS LOGIN</Typography>
+  
+  <Typography className='header' style={{fontSize:"23px",fontWeight:"bold"}} align="center" >BANKERS LOGIN</Typography>
              <form style={formstyle}>
-
-                      
-     
-          
-     <TextField
+          <TextField
     required
     id="outlined-required"
     type="email"
@@ -139,10 +143,21 @@ export default function Banker(){
     placeholder="Enter Your Password"
     style={inputstyle} 
   />
-     <Button variant="contained" disabled={disabled} onClick={login}>LOGIN</Button>
+  {/* {load ?  <LoadingButton
+          size="small"
+          color="secondary"
+          onClick={handleClick}
+          loading={loading}
+          loadingPosition="start"
+          startIcon={<SaveIcon />}
+          variant="contained"
+        >
+          <span>Loading</span>
+        </LoadingButton>:  <Button variant="contained"  style={{width:"30%"}} disabled={disabled} onClick={login}>LOGIN</Button>} */}
+    <Button variant="contained"  style={{width:"30%"}} disabled={disabled} onClick={login}>LOGIN</Button>
   </form>
 
-  <p>Don't have any account?</p><Link to={"/signup"}>SignUp</Link>
+  <p style={{marginTop:"-60px",color:"gray",fontWeight:"lighter"}}>Don't have any account?</p><Link to={"/bankerSignup"} style={{textDecoration:"none",fontWeight:"bold"}}>SignUp</Link>
 
   </Paper>
   </div>

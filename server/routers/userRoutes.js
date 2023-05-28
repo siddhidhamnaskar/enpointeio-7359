@@ -16,8 +16,8 @@ userRouter.post("/signup",async(req,res)=>{
         const newUser=new User({
           Name:req.body.Name,
           Email:req.body.Email,
-          Password:hashPass
-          
+          Password:hashPass,
+          Role:req.body.Role
   
             
         });
@@ -37,7 +37,7 @@ userRouter.post("/signup",async(req,res)=>{
 
 userRouter.post("/login",async(req,res)=>{
     try{
-        const user=await User.findOne({Email:req.body.Email});
+        const user=await User.findOne({Email:req.body.Email,Role:req.body.Role});
     
         !user && res.status(400).json("Wrong Credintials");
     
@@ -56,13 +56,6 @@ userRouter.post("/login",async(req,res)=>{
        else{
          res.status(400).json(err);
        }
-
-      
-    
-    //    const {Password, ...other}=user._doc;
-   
-    //    res.status(200).json(other);
-    
       }
       catch(err)
       {
@@ -76,7 +69,7 @@ userRouter.get("/users",async(req,res)=>{
   try{
     if(req.headers.authorization)
     {
-      const data=await User.find();
+      const data=await User.find({Role:"Customer"});
       res.status(200).json(data);
     }
 
