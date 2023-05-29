@@ -175,30 +175,31 @@ export default function Transactions(){
              
                    <Button variant="contained"  onClick={handleClickOpen}>DEPOSITE</Button>
                    <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Deposite Amount</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-         <h3>Available Balance:{balance}</h3> 
-          Enter Amout Here To Deposite
-          </DialogContentText>
-          <TextField
-          id="standard-helperText"
-          type="Number"
-          label="Enter Amount"
-          value={credit}
-           onChange={(e)=>setCredit(e.target.value)}
+                        <DialogTitle>Deposite Amount</DialogTitle>
+                         <DialogContent>
+                          <DialogContentText>
+                           <h3>Available Balance:{balance}</h3> 
+                            Enter Amout Here To Deposite
+                           </DialogContentText>
+                           <TextField
+                           id="standard-helperText"
+                            type="Number"
+                            label="Enter Amount"
+                            value={credit}
+                             onChange={(e)=>setCredit(e.target.value)}
         
-          variant="standard"
-          required
-        />
-          <Button variant="contained" onClick={deposite}>Deposite</Button>
+                              variant="standard"
+                              required
+                            />
+        
+                              <Button variant="contained" onClick={deposite}>Deposite</Button>
        
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+                            </DialogContent>
+                     <DialogActions>
+                       <Button onClick={handleClose}>Cancel</Button>
         
-        </DialogActions>
-      </Dialog>
+                       </DialogActions>
+                     </Dialog>
                 </Paper>
             </div>
 
@@ -209,29 +210,29 @@ export default function Transactions(){
                   <Button variant="contained" onClick={handleClickOpen1}>WITHDRAW</Button>
                   <Dialog open={open1} onClose={handleClose1}>
                   <DialogTitle>Wthdraw Amount</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <h3>Available Balance:{balance}</h3>
-          Enter Amout Here To WithDraw
-          </DialogContentText>
-          <TextField
-          id="standard-helperText"
-          type="Number"
-          label="Enter Amount"
-          value={draw}
-          onChange={(e)=>setDraw(e.target.value)}
+                      <DialogContent>
+                        <DialogContentText>
+                             <h3>Available Balance:{balance}</h3>
+                               Enter Amout Here To WithDraw
+                         </DialogContentText>
+                      <TextField
+                        id="standard-helperText"
+                        type="Number"
+                        label="Enter Amount"
+                        value={draw}
+                        onChange={(e)=>setDraw(e.target.value)}
         
-          variant="standard"
-          required
-        />
-          <Button variant="contained" onClick={withdraw}>Withdraw</Button>
+                        variant="standard"
+                         required
+                        />
+                       <Button variant="contained" onClick={withdraw}>Withdraw</Button>
        
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose1}>Cancel</Button>
+                        </DialogContent>
+                  <DialogActions>
+                     <Button onClick={handleClose1}>Cancel</Button>
         
-        </DialogActions>
-      </Dialog>
+                    </DialogActions>
+                        </Dialog>
                  </Paper>
             </div>
         </div>
