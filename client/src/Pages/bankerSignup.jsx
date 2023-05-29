@@ -140,7 +140,7 @@ const onsubmit=(e)=>{
     label="Password"
     name="Password"
     value={userData.Password}
-    placeholder="Enter Your Password"
+    placeholder="Enter password of minimum 8 characters"
     onChange={handleInput}
     style={inputstyle} 
   />

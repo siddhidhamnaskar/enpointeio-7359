@@ -48,8 +48,8 @@ export default function CustomizedTables({props}) {
   }
 
   return (
-    <TableContainer style={{width:'80%',height:"80vh",margin:'auto'}} component={Paper}>
-          <Button variant="contained" style={{width:"20%",display:"flex",alignSelf:"self-end",marginTop:"-30px"}} onClick={logout}>LOGOUT</Button>
+    <TableContainer style={{width:'80%',height:"100vh",margin:'auto',marginTop:"20px"}} component={Paper}>
+          <Button variant="contained" style={{width:"20%",display:"flex",alignSelf:"self-end",marginTop:"10px"}} onClick={logout}>LOGOUT</Button>
         <h2>Transaction Details</h2>
       <Table sx={{ minWidth: 300 }} aria-label="customized table">
         <TableHead>
